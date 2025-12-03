@@ -12,6 +12,12 @@ services:
       WORDPRESS_DB_NAME: rkt
     volumes:
       - wordpress_volume:/var/www/html
+
+      # ←←← این بخش جدید رو اضافه کن (خودکار wp-config رو درست می‌کنه)
+      - ./custom-config/wp-config-https.php:/usr/src/wordpress/wp-config.php:ro
+      # یا اگر فولدر custom-config نداری، مستقیم از اینجا بساز:
+      # - ./wp-config-https.php:/var/www/html/wp-config.php:ro
+
     networks:
       - shared_net
 
