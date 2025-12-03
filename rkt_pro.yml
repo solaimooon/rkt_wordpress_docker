@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  wordpress_prod:
+    image: wordpress:php8.2-apache
+    container_name: wordpress_prod
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: rkt
+    volumes:
+      - wordpress_volume:/var/www/html
+    networks:
+      - shared_net
+
+volumes:
+  wordpress_volume:
+    external: true
+    name: wordpress_data_volume
+
+networks:
+  shared_net:
+    external: true
