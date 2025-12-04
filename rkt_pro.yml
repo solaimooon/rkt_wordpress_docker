@@ -1,5 +1,4 @@
 version: '3.9'
-
 services:
   wordpress_prod:
     image: wordpress:php8.2-apache
@@ -13,11 +12,11 @@ services:
     volumes:
       - wordpress_volume:/var/www/html
 
-      # فایل wp-config (طبق توضیح قبلی)
-      - ./custom-config/wp-config-https.php:/usr/src/wordpress/wp-config.php:ro
+      # wp-config ثابت و ضد Mixed Content (برای آروان)
+      - ./custom-config/wp-config-https.php:/var/www/html/wp-config.php:ro
 
-      # ←← فایل بکاپ All-in-One WP Migration
-      - ./rkt.ir-20251204-093049-613.wpress:/var/www/html/wp-content/ai1wm-backups/rkt.ir-20251204-093049-613.wpress
+      # فایل بک‌آپ دقیقاً در مسیر نسخه ۶.۷۷
+      - ./rkt.ir-20251204-093049-613.wpress:/var/www/html/wp-content/plugins/all-in-one-wp-migration/storage/rkt.ir-20251204-093049-613.wpress
 
     networks:
       - shared_net
