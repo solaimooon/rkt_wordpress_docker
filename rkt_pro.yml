@@ -1,4 +1,5 @@
 version: '3.9'
+
 services:
   wordpress_prod:
     image: wordpress:php8.2-apache
@@ -12,11 +13,10 @@ services:
     volumes:
       - wordpress_volume:/var/www/html
 
-      # wp-config ثابت و ضد Mixed Content (برای آروان)
-      - ./custom-config/wp-config-https.php:/var/www/html/wp-config.php:ro
-
-      # فایل بک‌آپ دقیقاً در مسیر نسخه ۶.۷۷
-      - ./rkt.ir-20251204-093049-613.wpress:/var/www/html/wp-content/plugins/all-in-one-wp-migration/storage/rkt.ir-20251204-093049-613.wpress
+      # ←←← این بخش جدید رو اضافه کن (خودکار wp-config رو درست می‌کنه)
+      - ./custom-config/wp-config-https.php:/usr/src/wordpress/wp-config.php:ro
+      # یا اگر فولدر custom-config نداری، مستقیم از اینجا بساز:
+      # - ./wp-config-https.php:/var/www/html/wp-config.php:ro
 
     networks:
       - shared_net
