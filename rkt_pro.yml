@@ -13,10 +13,11 @@ services:
     volumes:
       - wordpress_volume:/var/www/html
 
-      # ←←← این بخش جدید رو اضافه کن (خودکار wp-config رو درست می‌کنه)
+      # فایل wp-config (طبق توضیح قبلی)
       - ./custom-config/wp-config-https.php:/usr/src/wordpress/wp-config.php:ro
-      # یا اگر فولدر custom-config نداری، مستقیم از اینجا بساز:
-      # - ./wp-config-https.php:/var/www/html/wp-config.php:ro
+
+      # ←← فایل بکاپ All-in-One WP Migration
+      - ./rkt.ir-20251204-093049-613.wpress:/var/www/html/wp-content/ai1wm-backups/rkt.ir-20251204-093049-613.wpress
 
     networks:
       - shared_net
